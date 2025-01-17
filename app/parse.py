@@ -66,7 +66,9 @@ def get_prod(item: WebElement) -> Product:
 def get_page(driver: WebDriver) -> list[Product]:
     products = []
     while True:
-        time.sleep(1)
+        WebDriverWait(driver, 10).until(
+            ec.presence_of_element_located((By.CLASS_NAME, "card"))
+        )
         items = driver.find_elements(By.CLASS_NAME, "card")
 
         for item in items:
